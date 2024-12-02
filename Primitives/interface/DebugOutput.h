@@ -62,6 +62,7 @@ typedef void(DILIGENT_CALL_TYPE* DebugMessageCallbackType)(enum DEBUG_MESSAGE_SE
                                                            int                         Line);
 extern DebugMessageCallbackType DebugMessageCallback;
 
+extern bool SuppressDebugMessages; // default false; true means suppress debug and error output
 
 /// Sets the debug message callback function
 

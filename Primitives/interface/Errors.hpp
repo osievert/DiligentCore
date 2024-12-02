@@ -58,14 +58,17 @@ void LogError(bool IsFatal, const char* Function, const char* FullFilePath, int 
     if (LastSlashPos != std::string::npos)
         FileName.erase(0, LastSlashPos + 1);
     auto Msg = FormatString(Args...);
-    if (DebugMessageCallback != nullptr)
+    if (!SuppressDebugMessages)
     {
-        DebugMessageCallback(IsFatal ? DEBUG_MESSAGE_SEVERITY_FATAL_ERROR : DEBUG_MESSAGE_SEVERITY_ERROR, Msg.c_str(), Function, FileName.c_str(), Line);
-    }
-    else
-    {
-        // No callback set - output to cerr
-        std::cerr << "Diligent Engine: " << (IsFatal ? "Fatal Error" : "Error") << " in " << Function << "() (" << FileName << ", " << Line << "): " << Msg << '\n';
+        if (DebugMessageCallback != nullptr)
+        {
+            DebugMessageCallback(IsFatal ? DEBUG_MESSAGE_SEVERITY_FATAL_ERROR : DEBUG_MESSAGE_SEVERITY_ERROR, Msg.c_str(), Function, FileName.c_str(), Line);
+        }
+        else
+        {
+            // No callback set - output to cerr
+            std::cerr << "Diligent Engine: " << (IsFatal ? "Fatal Error" : "Error") << " in " << Function << "() (" << FileName << ", " << Line << "): " << Msg << '\n';
+        }
     }
     ThrowIf<bThrowException>(std::move(Msg));
 }
@@ -116,7 +119,7 @@ void LogError(bool IsFatal, const char* Function, const char* FullFilePath, int 
     do                                                                                                                              \
     {                                                                                                                               \
         auto _msg = Diligent::FormatString(__VA_ARGS__);                                                                            \
-        if (Diligent::DebugMessageCallback != nullptr) Diligent::DebugMessageCallback(Severity, _msg.c_str(), nullptr, nullptr, 0); \
+        if (!Diligent::SuppressDebugMessages && Diligent::DebugMessageCallback != nullptr) Diligent::DebugMessageCallback(Severity, _msg.c_str(), nullptr, nullptr, 0); \
     } while (false)
 
 #define LOG_FATAL_ERROR_MESSAGE(...) LOG_DEBUG_MESSAGE(Diligent::DEBUG_MESSAGE_SEVERITY_FATAL_ERROR, ##__VA_ARGS__)

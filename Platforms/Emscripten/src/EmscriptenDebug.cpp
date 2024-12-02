@@ -80,4 +80,6 @@ static void OutputDebugMessage(DEBUG_MESSAGE_SEVERITY Severity,
 
 DebugMessageCallbackType DebugMessageCallback = OutputDebugMessage;
 
+bool SuppressDebugMessages = false;
+
 } // namespace Diligent
