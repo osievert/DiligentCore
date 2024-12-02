@@ -69,3 +69,8 @@ set_target_properties(DiligentCoreTest
 set_target_properties(DiligentCoreTest PROPERTIES
     FOLDER "DiligentCore/Tests"
 )
+
+add_custom_target(copy-assets ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/assets/shaders ${CMAKE_BINARY_DIR}/Tests/DiligentCoreTest/shaders
+    DEPENDS DiligentCoreTest
+)
