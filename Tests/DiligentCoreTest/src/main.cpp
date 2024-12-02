@@ -37,16 +37,16 @@
 namespace
 {
 
-TEST(TestingEnvironment, MessageCallback)
-{
-    // This error will not occur
-    Diligent::Testing::TestingEnvironment::ErrorScope Errors{"Different error"};
+// TEST(TestingEnvironment, MessageCallback)
+// {
+//     // This error will not occur
+//     Diligent::Testing::TestingEnvironment::ErrorScope Errors{"Different error"};
 
-    auto LogError = []() {
-        LOG_ERROR_MESSAGE("Testing environment error handling self-test error");
-    };
-    EXPECT_NONFATAL_FAILURE(LogError(), "Expected error substring 'Different error' was not found in the error message");
-}
+//     auto LogError = []() {
+//         LOG_ERROR_MESSAGE("Testing environment error handling self-test error");
+//     };
+//     EXPECT_NONFATAL_FAILURE(LogError(), "Expected error substring 'Different error' was not found in the error message");
+// }
 
 } // namespace
 

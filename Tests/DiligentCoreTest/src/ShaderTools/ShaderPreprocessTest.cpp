@@ -137,6 +137,7 @@ TEST(ShaderPreprocessTest, Include)
 
 TEST(ShaderPreprocessTest, InvalidInclude)
 {
+    Diligent::SuppressDebugMessages = true;
     RefCntAutoPtr<IShaderSourceInputStreamFactory> pShaderSourceFactory;
     CreateDefaultShaderSourceStreamFactory("shaders/ShaderPreprocessor", &pShaderSourceFactory);
     ASSERT_NE(pShaderSourceFactory, nullptr);
@@ -156,6 +157,7 @@ TEST(ShaderPreprocessTest, InvalidInclude)
         const auto Result = ProcessShaderIncludes(ShaderCI, {});
         EXPECT_EQ(Result, false);
     }
+    Diligent::SuppressDebugMessages = false;
 }
 
 TEST(ShaderPreprocessTest, UnrollIncludes)

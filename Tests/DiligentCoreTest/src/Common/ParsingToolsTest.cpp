@@ -1094,6 +1094,7 @@ func2(-25)-26;
 TEST(Common_ParsingTools, Tokenizer_Errors)
 {
     auto TestError = [](const char* Str, const char* Error) {
+        Diligent::SuppressDebugMessages = true;
         TestingEnvironment::ErrorScope ExpectedErrors{"Unable to tokenize string", Error};
         try
         {
@@ -1105,6 +1106,7 @@ TEST(Common_ParsingTools, Tokenizer_Errors)
             return;
         }
         ADD_FAILURE() << "Tokenize must throw an exception";
+        Diligent::SuppressDebugMessages = false;
     };
 
 
