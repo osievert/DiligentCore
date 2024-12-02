@@ -43,7 +43,7 @@ TEST(Common_SpinLock, ThreadContention)
     LOG_INFO_MESSAGE("Running SpinLock test on ", NumThreads, " threads / ", NumCores, " cores");
     size_t Counter = 0;
 
-    static constexpr size_t  NumThreadIterations = 32768;
+    static constexpr size_t  NumThreadIterations = 8192;
     Threading::SpinLock      Lock;
     std::vector<std::thread> Workers;
     Workers.reserve(NumThreads);

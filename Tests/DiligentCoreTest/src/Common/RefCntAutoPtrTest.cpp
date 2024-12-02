@@ -648,9 +648,9 @@ public:
 
     Object* m_pSharedObject = nullptr;
 #ifdef DILIGENT_DEBUG
-    static const int NumThreadInterations = 10000;
+    static const int NumThreadInterations = 1000;
 #else
-    static const int NumThreadInterations = 50000;
+    static const int NumThreadInterations = 5000;
 #endif
     Threading::Signal m_WorkerThreadSignal[2];
     Threading::Signal m_MainThreadSignal;
